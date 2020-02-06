@@ -1,0 +1,30 @@
+
+***User Story***
+
+<!--Type of User-->
+I travel a lot for work but I also like to party.
+<!--Goal-->
+Itinerary ideas and novelty.
+<!--Benefit-->
+I can get pumped for my destination while in flight and land with the tools to make my free time count!
+
+***Components***
+<!--What Info our app will provide-->
+1. Airplane Tracker API Open Sky
+    $ Tracker
+    $ Timer (duration)
+2. Spotify play list
+    $ Destination related songs
+    $ Play length = Duration of flight
+3. Enviroment of Destination
+    $ Weather
+    $ Air Quality
+    $ Resturant Reccomendations
+    $ Events
+4. Gifs or photos of destination
+    $ Bonus points for cats
+
+<!--Name Ideaas-->
+Party Bomb
+
+

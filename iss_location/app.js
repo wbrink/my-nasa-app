@@ -4,7 +4,6 @@
 // open-notify api uses no key
 // rate limit is every 5 seconds
 
-var Nasakey = "11yQc9WkVjHeeL8IJidQNKHLs6nlOzDY2UvKSo0W";
 // var queryURL = "http://api.open-notify.org/iss-now.json";
 var queryURL = "https://api.wheretheiss.at/v1/satellites/25544?suppress_response_codes=true&units=miles";
 var currentLocation; // array [latitude, longitude]

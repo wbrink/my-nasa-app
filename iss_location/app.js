@@ -12,6 +12,7 @@ var tleLine1; // data used to make past and future predictions line
 var tleLine2;
 
 var locationArray;
+var circle; 
 
 // ISS icon
 var ISSicon = L.icon({
@@ -26,11 +27,12 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	subdomains: 'abcd',
   // maxZoom: 10,
-  // minZoom: 2,
+  minZoom: 1
   // noWrap: true
 }).addTo(map);
 
 var markerGroup = L.layerGroup().addTo(map);
+var circleGroup = L.layerGroup().addTo(map);
 var ISSmarker;
 var visibility; // use this to color circle orange if light or dark blue if night
 
@@ -112,7 +114,7 @@ function getCurrentISSPosition() {
     $("#visibility").text(res.visibility)
     // if first run then we want two lines to be equal to create starting point
     if (currentLocation) {
-      
+  
       prevLocation = currentLocation;
       currentLocation = [parseFloat(latitude), parseFloat(longitude)];
     } else {
@@ -149,17 +151,19 @@ function addLine(prevLocation, currentLocation, color, weight) {
 // adds the ISS animation
 function addISS(currentLocation) {
   markerGroup.clearLayers(); // add to marker groups in order to be able to remove
+  circleGroup.clearLayers();
   ISSmarker = L.marker(currentLocation, {icon: ISSicon}).addTo(markerGroup);
+  map.setView(currentLocation);
 
   if (visibility == "eclipsed") { // in earth's shadow
-    var circle = L.circle(currentLocation, {
+    circle = L.circle(currentLocation, {
       radius: 500000,
       fillColor: "#49699e",
       color: "#49699e",
       fillOpacity: 0.5
     })
   } else if (visibility == "daylight") {
-    var circle = L.circle(currentLocation, {
+    circle = L.circle(currentLocation, {
       radius: 500000,
       fillColor: "#dbbe39",
       color: "#dbbe39",
@@ -167,20 +171,16 @@ function addISS(currentLocation) {
     })
   }
 
-  
-
-  // change circle size based on map zoom levels
-  var zoomLevel = map.getZoom();
-  if (zoomLevel === 2 || zoomLevel === 3) {
+  var zoom = map.getZoom();
+  if (zoom == 1) {
+    circle.setRadius(2750000);
+  } else if (zoom == 2) {
+    circle.setRadius(1750000);
+  } else if (zoom == 3) {
     circle.setRadius(1500000);
-  } else if (zoomLevel === 1) {
-    circle.setRadius(3000000);
-  } 
+  }
 
-  
-
-    
-  circle.addTo(markerGroup)
+  circle.addTo(circleGroup)
   //map.setView(currentLocation, 2);
 }
 
@@ -201,7 +201,51 @@ var interval = setInterval(function() {
 //   console.log("You clicked the map at latitude: " + lat + " and longitude: " + lng);
 // });
 
-/// event listener on zoom
-// map.on("zoom", function(e) {
-//   console.log(map.getZoom());
-// })
+// event listener on zoom
+map.on("zoom", function(e) {
+  var layers = circleGroup.getLayers();
+
+  // if no circles in group then do nothing (would happen when page is getting started)
+  if (layers.length == 0) {
+    return;
+  } else {
+    var zoom = map.getZoom();
+    console.log(map.getZoom());
+    circleGroup.clearLayers();
+    if (zoom === 1) {
+      // circle.setRadius(2750000);
+      circle = L.circle(currentLocation, {
+        radius: 2750000,
+        fillColor: "#dbbe39",
+        color: "#dbbe39",
+        fillOpacity: 0.5
+      });
+    
+    } else if (zoom === 2) {
+      // circle.setRadius(1750000);
+      circle = L.circle(currentLocation, {
+        radius: 1750000,
+        fillColor: "#dbbe39",
+        color: "#dbbe39",
+        fillOpacity: 0.5
+      });
+    } else if (zoom === 3) {
+      circle = L.circle(currentLocation, {
+        radius: 1500000,
+        fillColor: "#dbbe39",
+        color: "#dbbe39",
+        fillOpacity: 0.5
+      });
+    } else if (zoom == 4) {
+      circle = L.circle(currentLocation, {
+        radius: 500000,
+        fillColor: "#dbbe39",
+        color: "#dbbe39",
+        fillOpacity: 0.5
+      });
+    }
+  }
+  
+  // add circle back to map
+  circle.addTo(circleGroup);
+})

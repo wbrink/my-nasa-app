@@ -16,20 +16,33 @@ var circle;
 
 // ISS icon
 var ISSicon = L.icon({
-  iconUrl: "iss.png", 
-  iconSize: [75,75]
+  iconUrl: "iss_white.png", 
+  iconSize: [75,75],
   //iconAnchor: [40,40]
+  minZoom: 1
 })
 
 // setting up the map
 var map = L.map("mapid");
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	subdomains: 'abcd',
-  // maxZoom: 10,
-  minZoom: 1
-  // noWrap: true
-}).addTo(map);
+// L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+// 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+// 	subdomains: 'abcd',
+//   // maxZoom: 10,
+//   minZoom: 1
+//   // noWrap: true
+// }).addTo(map);
+
+var NASAGIBS_ViirsEarthAtNight2012 = L.tileLayer('https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}', {
+	attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.',
+	bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
+	minZoom: 1,
+	maxZoom: 8,
+	format: 'jpg',
+	time: '',
+	tilematrixset: 'GoogleMapsCompatible_Level'
+});
+
+NASAGIBS_ViirsEarthAtNight2012.addTo(map);
 
 var markerGroup = L.layerGroup().addTo(map);
 var circleGroup = L.layerGroup().addTo(map);
@@ -173,14 +186,14 @@ function addISS(currentLocation) {
 
   var zoom = map.getZoom();
   if (zoom == 1) {
-    circle.setRadius(2750000);
+    circle.setRadius(3700000);
   } else if (zoom == 2) {
-    circle.setRadius(1750000);
+    circle.setRadius(2000000);
   } else if (zoom == 3) {
-    circle.setRadius(1500000);
+    circle.setRadius(1500000-10000);
   }
 
-  circle.addTo(circleGroup)
+  circle.addTo(circleGroup);
   //map.setView(currentLocation, 2);
 }
 
@@ -215,7 +228,7 @@ map.on("zoom", function(e) {
     if (zoom === 1) {
       // circle.setRadius(2750000);
       circle = L.circle(currentLocation, {
-        radius: 2750000,
+        radius: 3700000,
         fillColor: "#dbbe39",
         color: "#dbbe39",
         fillOpacity: 0.5
@@ -224,21 +237,21 @@ map.on("zoom", function(e) {
     } else if (zoom === 2) {
       // circle.setRadius(1750000);
       circle = L.circle(currentLocation, {
-        radius: 1750000,
+        radius: 2000000,
         fillColor: "#dbbe39",
         color: "#dbbe39",
         fillOpacity: 0.5
       });
     } else if (zoom === 3) {
       circle = L.circle(currentLocation, {
-        radius: 1500000,
+        radius: 1500000-10000,
         fillColor: "#dbbe39",
         color: "#dbbe39",
         fillOpacity: 0.5
       });
     } else if (zoom == 4) {
       circle = L.circle(currentLocation, {
-        radius: 500000,
+        radius: 500000-10000,
         fillColor: "#dbbe39",
         color: "#dbbe39",
         fillOpacity: 0.5

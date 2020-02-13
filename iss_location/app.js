@@ -18,7 +18,7 @@ var circle;
 var ISSicon = L.icon({
   iconUrl: "iss_white.png", 
   iconSize: [75,75],
-  //iconAnchor: [40,40]
+  iconAnchor: [38,25],
   minZoom: 1
 })
 
@@ -186,7 +186,7 @@ function addISS(currentLocation) {
 
   var zoom = map.getZoom();
   if (zoom == 1) {
-    circle.setRadius(3700000);
+    circle.setRadius(2700000);
   } else if (zoom == 2) {
     circle.setRadius(2000000);
   } else if (zoom == 3) {
@@ -194,7 +194,7 @@ function addISS(currentLocation) {
   }
 
   circle.addTo(circleGroup);
-  //map.setView(currentLocation, 2);
+  map.setView(currentLocation);
 }
 
 
@@ -224,41 +224,15 @@ map.on("zoom", function(e) {
   } else {
     var zoom = map.getZoom();
     console.log(map.getZoom());
-    circleGroup.clearLayers();
+    //circleGroup.clearLayers();
     if (zoom === 1) {
-      // circle.setRadius(2750000);
-      circle = L.circle(currentLocation, {
-        radius: 3700000,
-        fillColor: "#dbbe39",
-        color: "#dbbe39",
-        fillOpacity: 0.5
-      });
-    
+      circle.setRadius(2700000);
     } else if (zoom === 2) {
-      // circle.setRadius(1750000);
-      circle = L.circle(currentLocation, {
-        radius: 2000000,
-        fillColor: "#dbbe39",
-        color: "#dbbe39",
-        fillOpacity: 0.5
-      });
+      circle.setRadius(2000000);
     } else if (zoom === 3) {
-      circle = L.circle(currentLocation, {
-        radius: 1500000-10000,
-        fillColor: "#dbbe39",
-        color: "#dbbe39",
-        fillOpacity: 0.5
-      });
+      circle.setRadius(1500000-10000);
     } else if (zoom == 4) {
-      circle = L.circle(currentLocation, {
-        radius: 500000-10000,
-        fillColor: "#dbbe39",
-        color: "#dbbe39",
-        fillOpacity: 0.5
-      });
+      circle.setRadius(500000-10000);
     }
   }
-  
-  // add circle back to map
-  circle.addTo(circleGroup);
 })

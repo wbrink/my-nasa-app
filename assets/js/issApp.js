@@ -16,7 +16,7 @@ var circle;
 
 // ISS icon
 var ISSicon = L.icon({
-  iconUrl: "iss_white.png", 
+  iconUrl: "assets/images/iss_white.png", 
   iconSize: [70,70],
   minZoom: 1
 })

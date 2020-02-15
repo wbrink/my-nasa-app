@@ -52,32 +52,39 @@ function contentLoaded(){
     fetch(`${apodUrl}?api_key=${apiKey}`)
     .then(res=>res.json())
     .then(data=>{
+        console.log(data);
 
         let media = "";
         if(data.media_type === "image"){
-            media = `<img class="responsive-img" src="${data.hdurl}">`
+            // media = `<img class="responsive-img" src="${data.hdurl}">`
+            // media = `<img src="${data.hdurl}">`;
+            $("#apodImage").attr("src", `${data.hdurl}`);
+            $("#apodText").text(`${data.explanation}`);
+            console.log(data.hdurl);
+            console.log(data.explanation);
+
         } else {
             media = `<div class="video-container">
                         <iframe src="${dat.hdurl}" width="560" height="315"></iframe>
                     </div>`
         }
 
-        apodElement.innerHTML = (`
-            <div class="card-image">
-                ${media}
-                <span class="card-title">${data.title}</span>
-            </div>
-            <div class="card-content">
-                <p>
-                    ${data.explanation}
-                </p>
-                <p>${(new Date(data.date)).toDateString()}</p>
+        // apodElement.innerHTML = (`
+        //     <div class="card-image">
+        //         ${media}
+        //         <span class="card-title">${data.title}</span>
+        //     </div>
+        //     <div class="card-content">
+        //         <p>
+        //             ${data.explanation}
+        //         </p>
+        //         <p>${(new Date(data.date)).toDateString()}</p>
                 
-            </div>
-            <div class="card-action">
-                <a target="_blank" href="https://www.nasa.gov/">Find more @ Nasa (Click Here)</a>
-            </div>
-        `)
+        //     </div>
+        //     <div class="card-action">
+        //         <a target="_blank" href="https://www.nasa.gov/">Find more @ Nasa (Click Here)</a>
+        //     </div>
+        // `)
     }).catch(handleError);
 
     /** Asteroid Feed */
@@ -105,8 +112,8 @@ function handleError(error){
     console.warn(error.message);
 }
 
+contentLoaded();
 
 
 
-
-window.addEventListener("DOMContentLoaded", contentLoaded)
+ window.addEventListener("DOMContentLoaded", contentLoaded)

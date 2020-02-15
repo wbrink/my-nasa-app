@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
+
     <!-- leaflet js  -->
     <link
       rel="stylesheet"
@@ -10,19 +12,41 @@
       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
       crossorigin=""
     />
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
 
     <title>ISS location</title>
   </head>
   <body>
-    <div id="mapid" style="height:500px;"></div>
+    <div class="map-container">
+      <!-- <div id="mapid" style="height:200px;"></div> -->
+      <div id="mapid"></div>
+
+      <p>Current Velocity: <span id="velocity"></span></p>
+      <p>Current Altitude: <span id="altitude"></span></p>
+      <p>Visibility: <span id="visibility"></span></p>
+    </div>
+
+    <div class="icon-container">
+      <div class="item iss"><img src="iss_white.png" id="iss-image" alt="" /></div>
+      <div class="item astroid"></div>
+      <div class="item image-of-day"></div>
+    </div>
+
     <!-- leaflet -->
     <script
       src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""
     ></script>
+
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- script using browserify npm tool to be able to use npm packages in the browser -->
+    <!-- using tlejs and satellite-js -->
+    <script src="lib/bundle/bundle.js"></script>
+
     <script src="app.js"></script>
   </body>
 </html>

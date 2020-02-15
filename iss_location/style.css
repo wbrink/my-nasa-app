@@ -1,0 +1,94 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  /* padding: 20px; */
+}
+
+.map-container {
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  background-color: aqua;
+}
+
+#mapid {
+  height: 50%;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.icon-container {
+  margin-top: 40px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: brown;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.item {
+  margin-left: 50px;
+  height: 60px;
+  width: 60px;
+  background-image: linear-gradient(to bottom right, red, yellow);
+  /* box-shadow: 1px black; */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#iss-image {
+  height: 40px;
+}
+
+/* map styling for contol */
+/* control area for map */
+.info {
+  padding: 6px 6px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); */
+  border-radius: 5px;
+}
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+  color: black;
+}
+
+b {
+  margin-right: 5px;
+}
+
+.orbit {
+  padding: 0px 2px;
+  font-size: 9px;
+  width: 10px;
+  height: 4px;
+  /* background-color: blue; */
+}
+
+/*  for the map legend about orbit lines */
+.current {
+  color: blue;
+  background-color: blue;
+}
+
+.past {
+  color: purple;
+  background-color: purple;
+}
+
+.future {
+  color: red;
+  background-color: red;
+}

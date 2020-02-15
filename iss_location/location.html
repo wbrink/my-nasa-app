@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
+
     <!-- leaflet js  -->
     <link
       rel="stylesheet"
@@ -17,7 +19,8 @@
   </head>
   <body>
     <div class="map-container">
-      <div id="mapid" style="height:500px;"></div>
+      <!-- <div id="mapid" style="height:200px;"></div> -->
+      <div id="mapid"></div>
 
       <p>Current Velocity: <span id="velocity"></span></p>
       <p>Current Altitude: <span id="altitude"></span></p>
@@ -25,7 +28,7 @@
     </div>
 
     <div class="icon-container">
-      <div class="item iss"></div>
+      <div class="item iss"><img src="iss_white.png" id="iss-image" alt="" /></div>
       <div class="item astroid"></div>
       <div class="item image-of-day"></div>
     </div>

@@ -5200,10 +5200,11 @@ function ecfToLookAngles(observerGeodetic, satelliteEcf) {
   return topocentricToLookAngles(topocentricCoords);
 }
 },{"./constants":2}],18:[function(require,module,exports){
-const { getLatLngObj, getGroundTracks }  = require("tle.js/dist/tlejs.cjs");
+const { getLatLngObj, getGroundTracks, getMeanMotion }  = require("tle.js/dist/tlejs.cjs");
 
 
-window.TestData = getGroundTracks;
+window.getGroundTracks = getGroundTracks;
+window.getMeanMotion = getMeanMotion;
 
 
 //example usage

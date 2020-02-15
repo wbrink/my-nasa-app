@@ -17,8 +17,7 @@ var circle;
 // ISS icon
 var ISSicon = L.icon({
   iconUrl: "iss_white.png", 
-  iconSize: [75,75],
-  iconAnchor: [38,25],
+  iconSize: [70,70],
   minZoom: 1
 })
 
@@ -39,15 +38,49 @@ var NASAGIBS_ViirsEarthAtNight2012 = L.tileLayer('https://map1.vis.earthdata.nas
 	maxZoom: 8,
 	format: 'jpg',
 	time: '',
-	tilematrixset: 'GoogleMapsCompatible_Level'
+  tilematrixset: 'GoogleMapsCompatible_Level'
 });
 
 NASAGIBS_ViirsEarthAtNight2012.addTo(map);
 
 var markerGroup = L.layerGroup().addTo(map);
 var circleGroup = L.layerGroup().addTo(map);
+var lineGroup = L.layerGroup().addTo(map);
 var ISSmarker;
 var visibility; // use this to color circle orange if light or dark blue if night
+var meanMotion; // Revolutions around the Earth per day (mean motion).
+
+
+// from leafletjs tutorials
+// creating control area
+var info = L.control();
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (velocity, altitude, visibility) {
+    this._div.innerHTML = '<h4 >ISS Info</h4>' +  
+        '<b>Velocity:</b> ' + velocity + ' mph<br /><b>Altitude: </b>' + altitude + ' mi<br /><b>Visibility:</b>' + visibility;
+};
+
+info.addTo(map);
+
+
+// adding legend to tell about orbits
+var legend = L.control({position: "bottomright"});
+
+legend.onAdd = function() {
+  var div = L.DomUtil.create('div', 'info'); // create a div with a class info and legend
+  div.innerHTML = "<div><span class='past orbit'>dd</span> Past</div><div><span class='current orbit'>dd</span> Current</div><div><span class='future orbit'>dd</span> Future</div>";
+  return div;
+}
+
+legend.addTo(map);
+
 
 
 // get TLE string and put current orbit line on map
@@ -61,7 +94,8 @@ function addOrbitLines() {
     }
     
     // window.TestData is function from bundle.js which used browserify to be able to use npm packages in browser
-    locationArray = window.TestData; // function that creates projections based on data returns array of [lat, long]
+    locationArray = window.getGroundTracks; // function that creates projections based on data returns array of [lat, long]
+    meanMotion = window.getMeanMotion(res);
     locationArray({
       tle: res,
       stepMS: 10000, // makes it slightly less acurate but loads faster, as step increases the data points go down
@@ -109,10 +143,6 @@ function getCurrentISSPosition() {
     url: queryURL,
     method: "GET"
   }).then(function(res) {
-    // if (!(res.message === "success")) {
-    //   //console.log("there seems to be an error");
-    //   return;
-    // }
     if (res.error) {
       return;
     }
@@ -121,10 +151,12 @@ function getCurrentISSPosition() {
     var latitude = res.latitude;
     var longitude = res.longitude;
     visibility = res.visibility;
-    
-    $("#velocity").text(res.velocity);
-    $("#altitude").text(res.altitude);
-    $("#visibility").text(res.visibility)
+    var velocity = parseFloat(res.velocity).toFixed(2);
+    var altitude = parseFloat(res.altitude).toFixed(2);
+
+    // update control on map
+    info.update(velocity, altitude, visibility);
+
     // if first run then we want two lines to be equal to create starting point
     if (currentLocation) {
   
@@ -140,7 +172,6 @@ function getCurrentISSPosition() {
       
     }
     
-    //addLine(prevLocation, currentLocation, 'yellow', 6);
     addISS(currentLocation);
     
   })
@@ -157,7 +188,7 @@ function addLine(prevLocation, currentLocation, color, weight) {
     weight: weight,
     opacity: 0.4,
 
-  }).addTo(map);
+  }).addTo(lineGroup);
 
 }
 
@@ -165,7 +196,7 @@ function addLine(prevLocation, currentLocation, color, weight) {
 function addISS(currentLocation) {
   markerGroup.clearLayers(); // add to marker groups in order to be able to remove
   circleGroup.clearLayers();
-  ISSmarker = L.marker(currentLocation, {icon: ISSicon}).addTo(markerGroup);
+  ISSmarker = L.marker(currentLocation, {icon: ISSicon}).addTo(markerGroup).bindPopup("<p>Latitude: " + currentLocation[0].toFixed(3) + "</p><p> Longitude: " + currentLocation[1].toFixed(3) + "</p>");
   map.setView(currentLocation);
 
   if (visibility == "eclipsed") { // in earth's shadow
@@ -186,11 +217,11 @@ function addISS(currentLocation) {
 
   var zoom = map.getZoom();
   if (zoom == 1) {
-    circle.setRadius(2700000);
+    circle.setRadius(2500000);
   } else if (zoom == 2) {
-    circle.setRadius(2000000);
+    circle.setRadius(1500000);
   } else if (zoom == 3) {
-    circle.setRadius(1500000-10000);
+    circle.setRadius(1000000);
   }
 
   circle.addTo(circleGroup);
@@ -202,17 +233,17 @@ function addISS(currentLocation) {
 addOrbitLines();
 getCurrentISSPosition(); // get initial call
 var interval = setInterval(function() {
+  // if satellite is in its next orbit
+  if (currentLocation[1] < 0 && prevLocation[1] > 0) {
+    // reload the orbits
+    lineGroup.clearLayers();
+    addOrbitLines();
+
+
+  }
   getCurrentISSPosition();
 }, 5000);
 
-
-/////// event listener on click
-// map.on('click', function(e){
-//   var coord = e.latlng;
-//   var lat = coord.lat;
-//   var lng = coord.lng;
-//   console.log("You clicked the map at latitude: " + lat + " and longitude: " + lng);
-// });
 
 // event listener on zoom
 map.on("zoom", function(e) {
@@ -226,11 +257,11 @@ map.on("zoom", function(e) {
     console.log(map.getZoom());
     //circleGroup.clearLayers();
     if (zoom === 1) {
-      circle.setRadius(2700000);
+      circle.setRadius(2500000);
     } else if (zoom === 2) {
-      circle.setRadius(2000000);
+      circle.setRadius(1500000);
     } else if (zoom === 3) {
-      circle.setRadius(1500000-10000);
+      circle.setRadius(1000000);
     } else if (zoom == 4) {
       circle.setRadius(500000-10000);
     }

@@ -1,10 +1,8 @@
-
-
 let speed = 20;
 
-document.getElementById('speed-slider').addEventListener('input', function(e){
-    speed = parseInt(e.target.value);
-})
+// document.getElementById('speed-slider').addEventListener('input', function(e){
+//     speed = parseInt(e.target.value);
+// })
 
 class Star {
     constructor(){

@@ -1,20 +1,14 @@
-
 /*Star Backdrop */
-#speed-container.range-field{
-    position:fixed;
-      right: 2em;
-      bottom: 0;
-  }
-
-canvas{
-    z-index: -1;
+#speed-container.range-field {
+  position: fixed;
+  right: 2em;
+  bottom: 0;
 }
 
 /* Auto scroll for Astroid Data Feed */
 #auto-scroll {
-    max-height: 600px;
-    background-color: chartreuse;
-    overflow-y: scroll;
-    margin-bottom: 20px;
-
+  max-height: 600px;
+  background-color: chartreuse;
+  overflow-y: scroll;
+  margin-bottom: 20px;
 }

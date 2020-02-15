@@ -54,31 +54,26 @@ var meanMotion; // Revolutions around the Earth per day (mean motion).
 // from leafletjs tutorials
 // creating control area
 var info = L.control();
-
 info.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
     this.update();
     return this._div;
 };
-
 // method that we will use to update the control based on feature properties passed
 info.update = function (velocity, altitude, visibility) {
     this._div.innerHTML = '<h4 >ISS Info</h4>' +  
-        '<b>Velocity:</b> ' + velocity + ' mph<br /><b>Altitude: </b>' + altitude + ' mi<br /><b>Visibility:</b>' + visibility;
+        '<b>Velocity:</b> ' + velocity + ' mph<br /><b>Altitude: </b>' + altitude + ' mi<br /><b>Visibility:</b>' + visibility +'<br><b>Mean Motion: </b>' + parseFloat(meanMotion).toFixed(2);
 };
-
 info.addTo(map);
 
 
 // adding legend to tell about orbits
 var legend = L.control({position: "bottomright"});
-
 legend.onAdd = function() {
   var div = L.DomUtil.create('div', 'info'); // create a div with a class info and legend
-  div.innerHTML = "<div><span class='past orbit'>dd</span> Past</div><div><span class='current orbit'>dd</span> Current</div><div><span class='future orbit'>dd</span> Future</div>";
+  div.innerHTML = "<h4>Orbits</h4><div><span class='past orbit'>dd</span> Past</div><div><span class='current orbit'>dd</span> Current</div><div><span class='future orbit'>dd</span> Future</div>";
   return div;
 }
-
 legend.addTo(map);
 
 

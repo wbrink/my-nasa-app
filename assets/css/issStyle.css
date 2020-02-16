@@ -1,8 +1,8 @@
-
 .map-container {
   margin: auto;
-  height: 400px;
-  width: 650px;
+  height: 550px;
+  /* width: 650px; */
+  width: 100%;
   /* background-color: aqua; */
 }
 
@@ -11,7 +11,6 @@
   width: 100%;
   border-radius: 20px;
 }
-
 
 #iss-image {
   height: 40px;
@@ -59,4 +58,11 @@ b {
 .future {
   color: red;
   background-color: red;
+}
+
+/* media qeury to  shrink the container for phone screens that 375x667 and under*/
+@media (max-width: 415px) {
+  .map-container {
+    height: 400px;
+  }
 }

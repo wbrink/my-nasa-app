@@ -60,13 +60,15 @@ function contentLoaded(){
             // media = `<img src="${data.hdurl}">`;
             $("#apodImage").attr("src", `${data.hdurl}`);
             $("#apodText").text(`${data.explanation}`);
-            console.log(data.hdurl);
-            console.log(data.explanation);
+            // console.log(data.hdurl);
+            // console.log(data.explanation);
 
         } else {
-            media = `<div class="video-container">
-                        <iframe src="${dat.hdurl}" width="560" height="315"></iframe>
-                    </div>`
+            // media = `<div class="video-container">
+            //             <iframe src="${dat.hdurl}" width="560" height="315"></iframe>
+            //         </div>`;
+            $("#imgOfDay").append($(`<iframe src="${dat.hdurl}" width="560" height="315"></iframe>`));
+
         }
 
         // apodElement.innerHTML = (`

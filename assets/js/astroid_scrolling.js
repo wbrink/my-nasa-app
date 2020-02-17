@@ -26,9 +26,15 @@ function scroller() {
 scroller();
 
 // event listeners if stop resume and top buttons are present
+
 stopButton.addEventListener("click", stopScrolling);
 resumeButton.addEventListener("click", resumeScrolling);
 topButton.addEventListener("click", goTopTable);
+
+// stopButton.addEventListener("click", stopScrolling);
+// resumeButton.addEventListener("click", resumeScrolling);
+// topButton.addEventListener("click", goTopTable);
+
 
 // will take event automatically if given
 function stopScrolling() {

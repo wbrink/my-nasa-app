@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Reset css -->
     <link rel="stylesheet" href="./assets/css/reset.css">
-    <!-- leaflet css -->
+    <!--Leaflet css -->
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
       crossorigin=""
     />
+    <!--Import Google Tomorrow Font  -->
+    <link href="https://fonts.googleapis.com/css?family=Tomorrow&display=swap" rel="stylesheet">"
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -29,114 +31,123 @@
   <body>
     <!--Container for body-->
     <div id="starsBackdrop" class= "container-fluid">
+      <!-- Nasa Logo & Title Bar -->
       <header>
         <div class= "row">
-          <div class = "col purple l12"> 
+          <div class = "col  s12"> 
             <div id= "nasaLogo">             
-                <div class="col l2">
-                      <img src="assets/images/nasaLogo.jpg" alt="" class= "responsive-img"> <!-- notice the "circle" class -->
+                <div class="col s2">
+                      <img src="assets/images/nasaLogo.jpg" alt="" class= "responsive-img"> 
                 </div>
             </div>
-            <div class ="col l10">      
-              <h1>Welcome to ISS</h1>
+            <div id="titleBar" class ="col s8">      
+              <h1>N.A.S.A API DEMO</h1>
             </div>
           </div>
         </div>
       </header>
+    </div> 
+          <!--container for main page content.  -->
           <main>
-          </div>
-          <div class = "row">
-            <div class ="col brown l2 center-align">
-              <!--Extra Button Space if Desired.-->
-            </div>
-            <div id="imgOfDayBtn">
-              <div class ="col brown l2 center-align">
-                <a class="btn-floating btn-large waves-effect waves-light red center-align"><i class="material-icons">photo_library</i></a>
+            <!--Navagation buttons -->
+            <nav>
+              <div class="row">
+                <!-- Image of the day btn -->
+                <div >
+                  <div class ="col s3 center-align">
+                    <a id="imgOfDay" class="btn-floating btn-large waves-effect waves-light  deep-purple accent-4 center-align"><i class="material-icons">photo_library</i></a>
+                  </div>
+                </div>
+                <!-- Iss tracker btn -->
+                <div>
+                  <div class ="col s3  center-align">
+                    <a id="issTracker" class="btn-floating btn-large waves-effect waves-light  deep-purple accent-4 center-align"><i class="material-icons">my_location</i></a>
+                  </div>
+                </div>
+                <!-- Video Feed from ISS btn -->
+                <div>  
+                  <div class ="col s3 center-align">
+                    <a id="issLive" class="btn-floating btn-large waves-effect waves-light  deep-purple accent-4 center-align"><i class="material-icons">videocam</i></a>
+                  </div>
+                </div>
+                <!-- Astroid data btn -->
+                <div>
+                  <div class ="col s3 center-align">
+                    <a id="astroid" class="btn-floating btn-large waves-effect waves-light  deep-purple accent-4 center-align"><i class="material-icons">toys</i></a>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div id="issTrackerBtn">
-              <div class ="col brown l2  center-align">
-                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">my_location</i></a>
-              </div>
-            </div>
-            <div id="issLiveBtn">  
-              <div class ="col brown l2 center-align">
-                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">videocam</i></a>
-              </div>
-            </div>
-            <div id="astroidBtn">
-              <div class ="col brown l2 center-align">
-                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">toys</i></a>
-              </div>
-            </div>  
-            <div class ="col brown l2 center-align">
-              <!--Extra Button Space if Desired.-->
-            </div>
-          </div>
+            </nav>
+          <!-- Container for view port -- Primary content area-->
             <div class = "row">
-                <div id="viewPort" class ="container" >
+                <div id="viewPort" class ="col m6 offset-m3" >
                   <!-- Image of the day -->
-                  <div id="imgOfDay" class="hide">
-                    <img id="apodImage" class="responsive-img" alt="image of the day">
+                  <div id="imgOfDayDiv" class="hidden">
+                    <img id="apodImage" class="responsive-img material-boxed" alt="image of the day">
                     <p id= "apodText"></p>
                   </div>
                   <!-- Iss tracker -->
-                  <div id="issTracker">
-                   <div class= "map-container hide">
+                  <div id="issTrackerDiv" class="shown">
+                   <div class= "map-container">
                      <!-- <p>this is a test</p> -->
                     <div id="mapid"></div>
                    </div>
                   </div> 
                   <!--Iss Live HD Video Feed -->
-                  <div id="issLive">
-                    <img class="responsive-img hide" alt="image of the day">
+                  <div id="issLiveDiv" class="hidden">
+                    <iframe width="100%" height="550rem" src="https://www.youtube.com/embed/8DuxysWsGBQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                   </div>
-                  <!--Mars Rover Images -->
-                  <div id="atroidFeed">
+                  <!--Incomming Asteroid Data -->
+                  <div id="astroidDiv" class="hidden">
                     <aside>
-                      <h2>Astroid Feed</h2>
-                      <form>
-                          <div>
-                              <div class="input-field">
-                                  <input type="text" id="start" class="datepicker">
-                                  <label for="start">Approach Date</label>
+                          <h2>Astroid Feed</h2>
+                          <!-- Astroid date selection input -->
+                          <form>
+                              <div>
+                                  <div class="input-field">
+                                      <input type="text" id="start" class="datepicker">
+                                      <label class="tLabel" for="start">Approach Date</label>
+                                      <a id="stop-autoScroll" class="waves-effect waves-light btn-small">Hault Scroll</a>
+                                      <a id="resume-autoScroll" class="waves-effect waves-light btn-small"><i class="material-icons left">cloud</i>Resume Scroll</a>
+                                      <a id="go-to-top" class="waves-effect waves-light btn-small"><i class="material-icons right">cloud</i>Top of List</a>
+                                  </div>
                               </div>
-                          </div>
-                      </form>
-                    <div id="auto-scroll">
-                      <table id="afeedTable" class="striped hide">
-                          <thead>
-                              <tr>
-                                  <th>Id</th>
-                                  <th>Name</th>
-                                  <th>Is Dangerous</th>
-                                  <th>Magnitude</th>
-                                  <th>Min</th>
-                                  <th>Max</th>
-                                  <th>Miss Distance</th>
-                                  <th>Approach Date</th>
-                              </tr>
-                          </thead>
-                          <tbody id="afeed">   
-                          </tbody>
-                      </table>
-                    </div>
-                  </aside>
+                          </form>
+                          <!-- Astroid data table -->
+                        <div id="auto-scroll">
+                          <table id="afeedTable" class="striped hide">
+                              <thead>
+                                  <tr>
+                                      <th>Id</th>
+                                      <th>Name</th>
+                                      <th>Is Dangerous</th>
+                                      <th>Magnitude</th>
+                                      <th>Min</th>
+                                      <th>Max</th>
+                                      <th>Miss Distance</th>
+                                      <th>Approach Date</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="afeed">   
+                              </tbody>
+                          </table>
+                        </div>
+                      </aside>
                   </div>                           
                 </div>
              </main>
+          <!-- Sticky footer -->
           <footer>
             <div class = "row">
-              <div class = "col yellow l12">
-                <p>Footer</p>
+              <div class = "col s12 =">
+                <p>testing the footer text</p>
               </div>
             </div>
           </footer>      
       </div>     
 
     
-    <!--User Interface js script-->
-    <script src="./assets/js/app.js" async defer></script>
+   
     <!-- leaflet -->
     <script
       src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
@@ -153,6 +164,8 @@
     <script src="./assets/js/issApp.js" async defer></script>
     <!--Asteroid & Image of Day script-->
     <script src="./assets/js/ast_imageApp.js" async defer></script>
+     <!--User Interface js script-->
+     <script src="./assets/js/uiApp.js" async defer></script>
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="./assets/js/materialize.min.js"></script>
   </body>

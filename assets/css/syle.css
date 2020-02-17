@@ -10,8 +10,9 @@
   background-color: #6200ea;
 }
 
-.datepicker-cancel, .datepicker-done {
- color: #6200ea;
+.datepicker-cancel,
+.datepicker-done {
+  color: #6200ea;
 }
 
 .is-today .datepicker-day-button {
@@ -61,7 +62,7 @@ header {
 }
 
 nav {
-  margin-bottom: 5px; 
+  margin-bottom: 5px;
   background-color: transparent;
 }
 
@@ -112,6 +113,11 @@ footer {
   color: white;
   font-weight: bold;
   /* border: 1px solid black; */
+}
+
+/* text color map legends */
+.info.leaflet-control {
+  color: black;
 }
 
 ​

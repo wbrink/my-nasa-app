@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="./assets/css/syle.css">
     <!--Tracker css -->
     <link rel="stylesheet" href="./assets/css/issStyle.css">
+    <!-- Astroid css -->
+    <link rel="stylesheet" href="./assets/css/astroid.css">
     <!--jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Space Mission App</title>
@@ -81,18 +83,18 @@
                     <p id= "apodText"></p>
                   </div>
                   <!-- Iss tracker -->
-                  <div id="issTracker">
+                  <div id="issTracker" class="hide">
                    <div class= "map-container ">
                      <!-- <p>this is a test</p> -->
                     <div id="mapid"></div>
                    </div>
                   </div> 
                   <!--Iss Live HD Video Feed -->
-                  <div id="issLive">
-                    <img class="responsive-img hide" alt="image of the day">
+                  <div id="issLive" class="hide">
+                    <img class="responsive-img" alt="image of the day">
                   </div>
                   <!--Mars Rover Images -->
-                  <div id="atroidFeed" class="hide">
+                  <div id="atroidFeed" class="">
                     <aside>
                       <h2>Astroid Feed</h2>
                       <form>
@@ -153,6 +155,8 @@
     <script src="./assets/js/issApp.js" async defer></script>
     <!--Asteroid & Image of Day script-->
     <script src="./assets/js/ast_imageApp.js" async defer></script>
+    <!-- astroid scrolling effect -->
+    <script src="./assets/js/astroid_scrolling.js"></script>
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="./assets/js/materialize.min.js"></script>
   </body>

@@ -8,8 +8,75 @@
 /* Auto scroll for Astroid Data Feed */
 #auto-scroll {
   max-height: 600px;
+<<<<<<< HEAD
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
+=======
+  background-color: #8075FF;
+  color: #211A1D;
+>>>>>>> 1135b29d39d63aa03f03d3b4ce848df180f77b88
   overflow-y: scroll;
   margin-bottom: 20px;
 }
+
+/* Page Font */
+body {
+  font-family: 'Tomorrow', sans-serif;
+  color: #CAD5CA;
+}
+
+/* Title Styling */
+header {
+  font-family: 'Tomorrow', sans-serif;
+  font: 4rem;
+  text-align: center;
+  color: #F8F0FB;
+  font-weight: bolder;
+  height: 4.5rem;
+  width: 100%;
+  padding: .1rem;
+  margin-bottom: 5rem;
+}
+
+nav {
+  margin-bottom: 5rem;
+  background-color: transparent;
+}
+
+/* Body Styling */
+
+.viewPort {
+  display: block;
+  margin-bottom: 5rem;
+
+}
+
+/* Footer Styling */
+footer{
+  background-color: #6200EA;
+  height: 30px;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  padding: 10px;
+}
+
+
+/* Hide/ Show Element */
+
+.hidden {
+  display: none;
+}
+
+.shown {
+  display: block;
+}
+
+#tLabel {
+  color: #F8F0FB;
+  font: 4rem;
+  font-weight: bold;
+}
+
+

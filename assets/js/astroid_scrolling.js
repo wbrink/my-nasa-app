@@ -54,6 +54,7 @@ function resumeScrolling() {
 }
 
 function goTopTable() {
+  stopScrolling();
   container.scrollTop = 0;
   count = 0; // variable used to set value for scrolltop (which is what controls the variable)
 }

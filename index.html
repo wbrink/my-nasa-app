@@ -31,19 +31,21 @@
   </head>
   <!--Main content of website-->
   <body>
-    <!--Container for body-->
+    <!--Container for body--> 
     <div id="starsBackdrop" class= "container-fluid">
+      <!-- Sticky Header Container -->
+      <div id="sticky-head">
       <!-- Nasa Logo & Title Bar -->
       <header>
         <div class= "row">
           <div class = "col  s12"> 
             <div id= "nasaLogo">             
                 <div class="col s2">
-                      <img src="assets/images/nasaLogo.jpg" alt="" class= "responsive-img"> 
+                      <img src="assets/images/nasaLogo.jpg" width="150px" alt="" class= "responsive-img"> 
                 </div>
             </div>
             <div id="titleBar" class ="col s8">      
-              <h1>N.A.S.A API DEMO</h1>
+              <h2>N.A.S.A API DEMO</h2>
             </div>
           </div>
         </div>
@@ -80,9 +82,10 @@
                 </div>
               </div>
             </nav>
+          </div>
           <!-- Container for view port -- Primary content area-->
             <div class = "row">
-                <div id="viewPort" class ="col m6 offset-m3" >
+                <div id="viewPort" class ="container" >
                   <!-- Image of the day -->
                   <div id="imgOfDayDiv" class="hidden">
                     <img id="apodImage" class="responsive-img material-boxed" alt="image of the day">
@@ -112,7 +115,7 @@
                               <div>
                                   <div class="input-field">
                                       <input type="text" id="start" class="datepicker">
-                                      <label class="tLabel" for="start">Approach Date</label>
+                                      <label class="tLabel" for="start">Select Approach Date</label>
                                       <a id="stop-autoScroll" class="waves-effect waves-light btn-small">Hault Scroll</a>
                                       <a id="resume-autoScroll" class="waves-effect waves-light btn-small"><i class="material-icons left">cloud</i>Resume Scroll</a>
                                       <a id="go-to-top" class="waves-effect waves-light btn-small"><i class="material-icons right">cloud</i>Top of List</a>
@@ -131,7 +134,7 @@
                                       <th>Min</th>
                                       <th>Max</th>
                                       <th>Miss Distance</th>
-                                      <th>Approach Date</th>
+                                      <!-- <th>Approach Date</th> -->
                                   </tr>
                               </thead>
                               <tbody id="afeed">   

@@ -22,10 +22,10 @@ function handleAFeedData({element_count, near_earth_objects}, afeedElement, afee
                 <td>${name}</td>
                 <td>${dangerous ? "YES" : "NO"}</td>
                 <td>${magnitude}</td>
-                <td>${min}</td>
-                <td>${max}</td>
-                <td>${miss_distance}</td>
-                <td>${date}</td>
+                <td>${min.toFixed(2)}</td>
+                <td>${max.toFixed(2)}</td>
+                <td>${parseFloat(miss_distance).toFixed(2)}</td>
+                
             </tr>`
 
         }).join("");
@@ -60,13 +60,15 @@ function contentLoaded(){
             // media = `<img src="${data.hdurl}">`;
             $("#apodImage").attr("src", `${data.hdurl}`);
             $("#apodText").text(`${data.explanation}`);
-            console.log(data.hdurl);
-            console.log(data.explanation);
+            // console.log(data.hdurl);
+            // console.log(data.explanation);
 
         } else {
-            media = `<div class="video-container">
-                        <iframe src="${dat.hdurl}" width="560" height="315"></iframe>
-                    </div>`
+            // media = `<div class="video-container">
+            //             <iframe src="${dat.hdurl}" width="560" height="315"></iframe>
+            //         </div>`;
+            $("#imgOfDay").append($(`<iframe src="${dat.hdurl}" width="560" height="315"></iframe>`));
+
         }
 
         // apodElement.innerHTML = (`

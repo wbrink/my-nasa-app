@@ -22,7 +22,7 @@ var ISSicon = L.icon({
 })
 
 // setting up the map
-var map = L.map("mapid");
+var mapISS = L.map("mapid");
 // L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
 // 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 // 	subdomains: 'abcd',
@@ -41,11 +41,11 @@ var NASAGIBS_ViirsEarthAtNight2012 = L.tileLayer('https://map1.vis.earthdata.nas
   tilematrixset: 'GoogleMapsCompatible_Level'
 });
 
-NASAGIBS_ViirsEarthAtNight2012.addTo(map);
+NASAGIBS_ViirsEarthAtNight2012.addTo(mapISS);
 
-var markerGroup = L.layerGroup().addTo(map);
-var circleGroup = L.layerGroup().addTo(map);
-var lineGroup = L.layerGroup().addTo(map);
+var markerGroup = L.layerGroup().addTo(mapISS);
+var circleGroup = L.layerGroup().addTo(mapISS);
+var lineGroup = L.layerGroup().addTo(mapISS);
 var ISSmarker;
 var visibility; // use this to color circle orange if light or dark blue if night
 var meanMotion; // Revolutions around the Earth per day (mean motion).
@@ -54,7 +54,7 @@ var meanMotion; // Revolutions around the Earth per day (mean motion).
 // from leafletjs tutorials
 // creating control area
 var info = L.control();
-info.onAdd = function (map) {
+info.onAdd = function (mapISS) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
     this.update();
     return this._div;
@@ -64,7 +64,7 @@ info.update = function (velocity, altitude, visibility) {
     this._div.innerHTML = '<h4 >ISS Info</h4>' +  
         '<b>Velocity:</b> ' + velocity + ' mph<br /><b>Altitude: </b>' + altitude + ' mi<br /><b>Visibility:</b>' + visibility +'<br><b>Mean Motion: </b>' + parseFloat(meanMotion).toFixed(2);
 };
-info.addTo(map);
+info.addTo(mapISS);
 
 
 // adding legend to tell about orbits
@@ -74,7 +74,7 @@ legend.onAdd = function() {
   div.innerHTML = "<h4>Orbits</h4><div><span class='past orbit'>dd</span> Past</div><div><span class='current orbit'>dd</span> Current</div><div><span class='future orbit'>dd</span> Future</div>";
   return div;
 }
-legend.addTo(map);
+legend.addTo(mapISS);
 
 
 
@@ -162,7 +162,7 @@ function getCurrentISSPosition() {
       currentLocation = [parseFloat(latitude), parseFloat(longitude)];
       prevLocation = [parseFloat(latitude), parseFloat(longitude)];
 
-      map.setView(currentLocation, 2) // sets view to where the first 
+      mapISS.setView(currentLocation, 2) // sets view to where the first 
       ISSmarker = L.marker(currentLocation, {icon: ISSicon}).addTo(markerGroup);
       
     }
@@ -192,7 +192,7 @@ function addISS(currentLocation) {
   markerGroup.clearLayers(); // add to marker groups in order to be able to remove
   circleGroup.clearLayers();
   ISSmarker = L.marker(currentLocation, {icon: ISSicon}).addTo(markerGroup).bindPopup("<p>Latitude: " + currentLocation[0].toFixed(3) + "</p><p> Longitude: " + currentLocation[1].toFixed(3) + "</p>");
-  map.setView(currentLocation);
+  mapISS.setView(currentLocation);
 
   if (visibility == "eclipsed") { // in earth's shadow
     circle = L.circle(currentLocation, {
@@ -210,7 +210,7 @@ function addISS(currentLocation) {
     })
   }
 
-  var zoom = map.getZoom();
+  var zoom = mapISS.getZoom();
   if (zoom == 1) {
     circle.setRadius(2500000);
   } else if (zoom == 2) {
@@ -220,7 +220,7 @@ function addISS(currentLocation) {
   }
 
   circle.addTo(circleGroup);
-  map.setView(currentLocation);
+  mapISS.setView(currentLocation);
 }
 
 
@@ -241,15 +241,15 @@ var interval = setInterval(function() {
 
 
 // event listener on zoom
-map.on("zoom", function(e) {
+mapISS.on("zoom", function(e) {
   var layers = circleGroup.getLayers();
 
   // if no circles in group then do nothing (would happen when page is getting started)
   if (layers.length == 0) {
     return;
   } else {
-    var zoom = map.getZoom();
-    console.log(map.getZoom());
+    var zoom = mapISS.getZoom();
+    // console.log(mapISS.getZoom());
     //circleGroup.clearLayers();
     if (zoom === 1) {
       circle.setRadius(2500000);

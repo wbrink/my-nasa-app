@@ -1,0 +1,22 @@
+/* container that holds the astroid table */
+#auto-scroll {
+  max-height: 450px;
+  overflow-y: scroll;
+  margin: auto;
+}
+
+#afeedTable thead tr th {
+  position: sticky;
+  top: 0;
+  background-color: rgba(98, 0, 234, 1);
+  color: white;
+  font-weight: bold;
+  /* border: 1px solid black; */
+}
+
+/* media qeury to  shrink the container for phone screens that 375x667 and under*/
+@media (max-width: 415px) {
+  #auto-scroll {
+    height: 400px;
+  }
+}

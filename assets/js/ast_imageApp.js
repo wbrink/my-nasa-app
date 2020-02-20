@@ -62,6 +62,10 @@ function contentLoaded(){
             $("#apodText").text(`${data.explanation}`);
             // console.log(data.hdurl);
             // console.log(data.explanation);
+            // modal function for image of the day explanation.
+            $(document).ready(function(){
+                $('.modal').modal();
+              });
 
         } else {
             // media = `<div class="video-container">

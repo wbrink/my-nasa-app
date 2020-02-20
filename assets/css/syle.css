@@ -43,10 +43,10 @@ body {
   color: #cad5ca;
 }
 
-nav {
+/* nav {
   position: sticky;
   top: 0;
-}
+} */
 
 /* Title Styling */
 header {
@@ -62,7 +62,7 @@ header {
 }
 
 nav {
-  margin-bottom: 5px;
+  /* margin-bottom: 40px; */
   background-color: transparent;
 }
 
@@ -70,7 +70,8 @@ nav {
 
 .viewPort {
   display: block;
-  margin-bottom: 5rem;
+  /* margin-bottom: 20px;
+  margin-top: 40px; */
 }
 
 /* Footer Styling */
@@ -82,6 +83,12 @@ footer {
   position: fixed;
   bottom: 0;
   padding: 10px;
+}
+
+/* Modal Styling */
+.modal {
+  color: #211a1d;
+
 }
 
 /* Hide/ Show Element */
